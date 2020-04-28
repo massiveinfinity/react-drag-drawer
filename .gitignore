@@ -5,6 +5,6 @@ examples/simple/build
 .DS_Store
 /dist
 umd/
-lib/
-es/
+#lib/
+#es/
 demo/dist
