@@ -40,7 +40,8 @@ export default class Drawer extends Component {
     containerOpacity: PropTypes.number,
     containerElementClass: PropTypes.string,
     getContainerRef: PropTypes.func,
-    getModalRef: PropTypes.func
+    getModalRef: PropTypes.func,
+    isDraggable: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -57,7 +58,8 @@ export default class Drawer extends Component {
     allowClose: true,
     dontApplyListeners: false,
     containerElementClass: "",
-    modalElementClass: ""
+    modalElementClass: "",
+    isDraggable: true
   };
 
   state = {
@@ -182,7 +184,7 @@ export default class Drawer extends Component {
   };
 
   drag = event => {
-    const { direction } = this.props;
+    const { direction, isDraggable } = this.props;
     const { thumb, start, position } = this.state;
     const { pageY, pageX } = event.touches[0];
 
@@ -193,7 +195,7 @@ export default class Drawer extends Component {
       ? position + delta
       : position - delta;
 
-    if (newPosition > 0 && this.ALLOW_DRAWER_TRANSFORM) {
+    if (newPosition > 0 && this.ALLOW_DRAWER_TRANSFORM && isDraggable) {
       // stop android's pull to refresh behavior
       event.preventDefault();
 
